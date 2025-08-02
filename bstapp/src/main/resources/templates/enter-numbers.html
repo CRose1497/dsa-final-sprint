@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Enter Numbers</title>
+    <title>Binary Search Tree Builder</title>
 </head>
 <body>
     <h2>Binary Search Tree Builder</h2>
 
-    <form action="/process-numbers" method="post">
+    <!-- Input form -->
+    <form action="/build" method="post">
         <label>Enter numbers (comma-separated):</label><br>
         <input type="text" name="numbers" placeholder="e.g., 5,3,8,1,4" required>
         <br><br>
         <button type="submit">Submit</button>
     </form>
 
-    <br>
-    <form action="/previous-trees" method="get">
+    <!-- Error message if invalid input -->
+    <p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+    <!-- Link to previous trees -->
+    <form action="/previous" method="get">
         <button type="submit">Show Previous Trees</button>
     </form>
 </body>

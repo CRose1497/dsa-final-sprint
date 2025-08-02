@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Tree Result</title>
+    <title>Tree Results</title>
 </head>
 <body>
     <h2>Binary Search Tree Result</h2>
 
-    <div th:if="${root != null}">
-        <pre th:text="${#objects.toJson(root)}"></pre>
+    <!-- Display for newly built tree -->
+    <div th:if="${originalInput}">
+        <p><strong>Original Input:</strong> <span th:text="${originalInput}"></span></p>
+        <p><strong>In-Order Traversal:</strong> <span th:text="${treeStructure}"></span></p>
+    </div>
+
+    <!-- Display list of previous entries -->
+    <div th:if="${entries}">
+        <h3>Previous Submissions</h3>
+        <ul>
+            <li th:each="entry : ${entries}">
+                <strong th:text="${entry.originalInput}"></strong> → 
+                <span th:text="${entry.treeStructure}"></span>
+            </li>
+        </ul>
     </div>
 
     <br><br>
-    <a href="/enter-numbers">Enter Another</a>
+    <a href="/">Enter Another</a>
 </body>
 </html>
