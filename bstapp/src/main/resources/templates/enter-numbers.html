@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Enter Numbers</title>
+</head>
+<body>
+    <h2>Binary Search Tree Builder</h2>
+
+    <form action="/process-numbers" method="post">
+        <label>Enter numbers (comma-separated):</label><br>
+        <input type="text" name="numbers" placeholder="e.g., 5,3,8,1,4" required>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <br>
+    <form action="/previous-trees" method="get">
+        <button type="submit">Show Previous Trees</button>
+    </form>
+</body>
+</html>
