@@ -1,34 +1,52 @@
 package com.sprint.bstapp.controller;
 
 import com.sprint.bstapp.model.BinarySearchTree;
-import com.sprint.bstapp.model.TreeNode;
+import com.sprint.bstapp.model.TreeEntry;
+import com.sprint.bstapp.service.TreeEntryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
 
 @Controller
 public class TreeController {
 
-    private BinarySearchTree bst = new BinarySearchTree();
+    @Autowired
+    private TreeEntryService treeEntryService;
 
-    @GetMapping("/enter-numbers")
+    @GetMapping("/")
     public String showForm() {
         return "enter-numbers";
     }
 
-    @PostMapping("/process-numbers")
-    public String processNumbers(@RequestParam("numbers") String numbers, Model model) {
-        String[] numArray = numbers.split(",");
+    @PostMapping("/build")
+    public String buildTree(@RequestParam("numbers") String numbers, Model model) {
+        String[] parts = numbers.split(",");
+        BinarySearchTree bst = new BinarySearchTree();
 
-        for (String numStr : numArray) {
+        for (String part : parts) {
             try {
-                int num = Integer.parseInt(numStr.trim());
-                bst.insert(num);
-            } catch (NumberFormatException ignored) {}
+                int number = Integer.parseInt(part.trim());
+                bst.insert(number);
+            } catch (NumberFormatException e) {
+                model.addAttribute("error", "Invalid input: " + part);
+                return "enter-numbers";
+            }
         }
 
-        TreeNode root = bst.getRoot();
-        model.addAttribute("root", root);
-        return "result"; // You’ll build this next
+        String treeStructure = bst.inOrder();
+        TreeEntry entry = new TreeEntry(numbers, treeStructure);
+        treeEntryService.saveTreeEntry(entry);
+
+        model.addAttribute("originalInput", numbers);
+        model.addAttribute("treeStructure", treeStructure);
+
+        return "results";
+    }
+
+    @GetMapping("/previous")
+    public String showPreviousTrees(Model model) {
+        model.addAttribute("entries", treeEntryService.getAllEntries());
+        return "results";
     }
 }
