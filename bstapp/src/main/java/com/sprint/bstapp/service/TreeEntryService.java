@@ -21,4 +21,9 @@ public class TreeEntryService {
     public List<TreeEntry> getAllEntries() {
         return repository.findAll();
     }
+
+    public void saveTreeEntry(TreeEntry entry) {
+        repository.save(entry);
+    }
+
 }

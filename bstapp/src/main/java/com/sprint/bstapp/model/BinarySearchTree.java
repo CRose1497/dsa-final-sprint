@@ -25,7 +25,19 @@ public class BinarySearchTree {
         return current;
     }
 
-    // Optional: For testing
+    public String inOrder() {
+        StringBuilder sb = new StringBuilder();
+        inOrderTraversal(root, sb);
+        return sb.toString().trim();
+    }
+
+    private void inOrderTraversal(TreeNode node, StringBuilder sb) {
+        if (node == null) return;
+        inOrderTraversal(node.getLeft(), sb);
+        sb.append(node.getValue()).append(" ");
+        inOrderTraversal(node.getRight(), sb);
+    }
+
     public void inOrderTraversal(TreeNode node) {
         if (node != null) {
             inOrderTraversal(node.getLeft());
