@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Previous Trees</title>
+</head>
+<body>
+    <h2>Previous Binary Search Trees</h2>
+
+    <div th:if="${entries.isEmpty()}">
+        <p>No previous trees found.</p>
+    </div>
+
+    <div th:if="${!entries.isEmpty()}">
+        <table border="1" cellpadding="8">
+            <thead>
+                <tr>
+                    <th>Original Input</th>
+                    <th>Tree Structure (JSON)</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="entry : ${entries}">
+                    <td th:text="${entry.input}"></td>
+                    <td><pre th:text="${entry.treeStructure}"></pre></td>
+                    <td th:text="${#temporals.format(entry.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+    <a href="/enter-numbers">Back to Input</a>
+</body>
+</html>
