@@ -29,7 +29,8 @@ This is the final sprint project for the Data Structures and Algorithms course. 
 Located under `src/test/java/...`
 - Tests cover in-order traversal, node insertion, and in-memory service logic
 ---
-## 🗂️ Project Structure
+📂 Project Structure
+```
 src/
 └── main/
 ├── java/
@@ -41,7 +42,7 @@ src/
 └── resources/
 ├── templates/ # HTML (Thymeleaf) files
 └── static/ # CSS styling
-
+```
 ---
 ## 💡 How to Run
 1. Clone the repo
